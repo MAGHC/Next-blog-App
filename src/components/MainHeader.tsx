@@ -19,9 +19,6 @@ const MainHeader = () => {
           <Image width={120} height={20} alt="logo" src={Logo} />
         </Link>
         <nav className="flex gap-2">
-          <Link className={NAV_COMMON_STYLE} href={'/chat'}>
-            <BiConversation></BiConversation>CHAT
-          </Link>
           <Link className={NAV_COMMON_STYLE} href={'/join'}>
             <BiMessageSquareEdit></BiMessageSquareEdit>
             JOIN
