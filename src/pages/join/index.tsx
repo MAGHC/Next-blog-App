@@ -2,10 +2,13 @@ import FormContainer from '@/components/LoginJoinContainer';
 import { useEffect, useState } from 'react';
 
 import useValidation from './../../hooks/validation';
+import { useAuth } from '@/hooks/auth';
 
 const Index = () => {
   const [valid, setValid] = useState(false);
-  console.log(valid);
+
+  const { joinHandler } = useAuth();
+
   const {
     email,
     nickName,
@@ -26,6 +29,9 @@ const Index = () => {
 
   function submitJoinForm(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    const body = { email, nickName, password };
+    joinHandler(body).then(console.log);
   }
 
   return (
