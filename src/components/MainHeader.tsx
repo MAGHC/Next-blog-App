@@ -14,15 +14,15 @@ const MainHeader = () => {
     <Head>
       <meta name="author" content="MAGHC"></meta>
       <meta name="description" content="Portfolio for MAGHC" />
-      <div className="p-4 bg-slate-700 flex justify-between items-center">
-        <div>
-          <Image alt="logo" src={Logo} />
-        </div>
+      <div className="p-4 w-full bg-slate-700 flex justify-between items-center">
+        <Link className={NAV_COMMON_STYLE} href={'/'}>
+          <Image width={120} height={20} alt="logo" src={Logo} />
+        </Link>
         <nav className="flex gap-2">
           <Link className={NAV_COMMON_STYLE} href={'/chat'}>
             <BiConversation></BiConversation>CHAT
           </Link>
-          <Link className={NAV_COMMON_STYLE} href={'/'}>
+          <Link className={NAV_COMMON_STYLE} href={'/join'}>
             <BiMessageSquareEdit></BiMessageSquareEdit>
             JOIN
           </Link>
