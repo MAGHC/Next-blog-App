@@ -14,6 +14,7 @@ const MainHeader = () => {
     <Head>
       <meta name="author" content="MAGHC"></meta>
       <meta name="description" content="Portfolio for MAGHC" />
+      <meta name="next-head-count" />
       <div className="p-4 w-full bg-slate-700 flex justify-between items-center">
         <Link className={NAV_COMMON_STYLE} href={'/'}>
           <Image width={120} height={20} alt="logo" src={Logo} />
