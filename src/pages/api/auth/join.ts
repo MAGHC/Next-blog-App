@@ -14,19 +14,27 @@ export default async function join(req: NextApiRequest, res: NextApiResponse) {
 
     const { email, nickName, password }: JoinT = data;
 
+    const existEmail = await db.collection('users').findOne({ email });
+
+    if (existEmail) {
+      res.status(422).json({ message: '이미 존재하는 유저입니다.' });
+      return;
+    }
     if (!email || !nickName || !password) {
       res.status(422).json({ message: '이메일,닉네임,패스워드를 확인해주세요' });
+      return;
     }
 
     const hashedPw = await hashPw(password);
 
     const result = await db.collection('users').insertOne({
-      email: email,
+      email,
       password: hashedPw,
       nickName: nickName,
     });
 
     res.status(201).json({ message: '생성되었습니다.', data: data });
+    client.close();
   } else {
     res.status(200).json({ message: 'getMethod확인용' });
   }
