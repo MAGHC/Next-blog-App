@@ -2,6 +2,8 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { useSession } from 'next-auth/react';
+
 import Logo from '@/assets/Logo.svg';
 
 import { BiLogIn, BiConversation, BiMessageSquareEdit, BiLogOut } from 'react-icons/bi';
@@ -10,6 +12,10 @@ const NAV_COMMON_STYLE =
   ' transition duration-300 hover:scale-110 font-bold text-bright font-title flex items-center ';
 
 const MainHeader = () => {
+  const { data: session, status } = useSession();
+
+  const isLogin = status === 'authenticated' ? true : false;
+
   return (
     <Head>
       <meta name="author" content="MAGHC"></meta>
@@ -20,14 +26,18 @@ const MainHeader = () => {
           <Image width={120} height={20} alt="logo" src={Logo} />
         </Link>
         <nav className="flex gap-2">
-          <Link className={NAV_COMMON_STYLE} href={'/join'}>
-            <BiMessageSquareEdit></BiMessageSquareEdit>
-            JOIN
-          </Link>
-          <Link className={NAV_COMMON_STYLE} href={'/'}>
-            <BiLogIn></BiLogIn>
-            LOGIN
-          </Link>
+          {isLogin && (
+            <>
+              <Link className={NAV_COMMON_STYLE} href={'/join'}>
+                <BiMessageSquareEdit></BiMessageSquareEdit>
+                JOIN
+              </Link>
+              <Link className={NAV_COMMON_STYLE} href={'/'}>
+                <BiLogIn></BiLogIn>
+                LOGIN
+              </Link>
+            </>
+          )}
         </nav>
       </div>
     </Head>
