@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { connectDb } from '@/lib/DB/mongoDb';
 
 import { JoinT } from '@/type/auth';
+import { hashPw } from '@/lib/HASH/hash';
 
 export default async function join(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
@@ -17,9 +18,11 @@ export default async function join(req: NextApiRequest, res: NextApiResponse) {
       res.status(422).json({ message: '이메일,닉네임,패스워드를 확인해주세요' });
     }
 
-    db.collection('users').insertOne({
+    const hashedPw = hashPw(password);
+
+    const result = await db.collection('users').insertOne({
       email: email,
-      password: password,
+      password: hashedPw,
       nickName: nickName,
     });
 
