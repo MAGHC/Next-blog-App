@@ -18,7 +18,7 @@ export default async function join(req: NextApiRequest, res: NextApiResponse) {
       res.status(422).json({ message: '이메일,닉네임,패스워드를 확인해주세요' });
     }
 
-    const hashedPw = hashPw(password);
+    const hashedPw = await hashPw(password);
 
     const result = await db.collection('users').insertOne({
       email: email,
