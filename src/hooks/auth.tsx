@@ -1,5 +1,7 @@
 import { useFetch } from './fetch';
-import { JoinT } from '@/type/auth';
+import { JoinT, LoginT } from '@/type/auth';
+
+import { signIn } from 'next-auth/react';
 
 export function useAuth() {
   const { postData } = useFetch();
@@ -10,5 +12,15 @@ export function useAuth() {
     return res;
   };
 
-  return { joinHandler };
+  const loginHandler = async (body: LoginT) => {
+    const res = await signIn('credentials', {
+      redirect: false,
+      email: body.email,
+      password: body.password,
+    });
+
+    console.log(res);
+  };
+
+  return { joinHandler, loginHandler };
 }
