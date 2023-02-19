@@ -11,7 +11,7 @@ import { BiLogIn, BiMessageSquareEdit, BiLogOut } from 'react-icons/bi';
 import { useAuth } from '@/hooks/auth';
 
 const NAV_COMMON_STYLE =
-  ' transition duration-300 hover:scale-110 font-bold text-bright font-title flex items-center ';
+  ' mx-2 transition duration-300 gap-1 hover:scale-110 font-bold text-bright font-title flex items-center ';
 
 const Nav = () => {
   const { data: session, status } = useSession();
@@ -41,6 +41,7 @@ const Nav = () => {
           )}
           {session && (
             <button onClick={logoutHandler} className={NAV_COMMON_STYLE}>
+              <BiLogOut></BiLogOut>
               LOGOUT
             </button>
           )}
