@@ -1,7 +1,7 @@
 import { useFetch } from './fetch';
 import { JoinT, LoginT } from '@/type/auth';
 
-import { signIn } from 'next-auth/react';
+import { signIn, signOut } from 'next-auth/react';
 
 export function useAuth() {
   const { postData } = useFetch();
@@ -22,5 +22,16 @@ export function useAuth() {
     console.log(res);
   };
 
-  return { joinHandler, loginHandler };
+  const logoutHandler = async () => {
+    console.log('확인');
+    const res = await signOut({ redirect: false });
+
+    return res;
+  };
+
+  const test = () => {
+    console.log('dasdsadsa');
+  };
+
+  return { joinHandler, loginHandler, logoutHandler, test };
 }

@@ -6,7 +6,9 @@ import { useSession } from 'next-auth/react';
 
 import Logo from '@/assets/Logo.svg';
 
-import { BiLogIn, BiConversation, BiMessageSquareEdit, BiLogOut } from 'react-icons/bi';
+import { BiLogIn, BiMessageSquareEdit, BiLogOut } from 'react-icons/bi';
+
+import { useAuth } from '@/hooks/auth';
 
 const NAV_COMMON_STYLE =
   ' transition duration-300 hover:scale-110 font-bold text-bright font-title flex items-center ';
@@ -14,19 +16,18 @@ const NAV_COMMON_STYLE =
 const MainHeader = () => {
   const { data: session, status } = useSession();
 
-  const isLogin = status === 'authenticated' ? true : false;
+  const { logoutHandler } = useAuth();
+
+  console.log(session);
 
   return (
-    <Head>
-      <meta name="author" content="MAGHC"></meta>
-      <meta name="description" content="Portfolio for MAGHC" />
-      <meta name="next-head-count" />
+    <>
       <div className="p-4 w-full bg-slate-700 flex justify-between items-center">
         <Link className={NAV_COMMON_STYLE} href={'/'}>
           <Image width={120} height={20} alt="logo" src={Logo} />
         </Link>
         <nav className="flex gap-2">
-          {isLogin && (
+          {!session && (
             <>
               <Link className={NAV_COMMON_STYLE} href={'/join'}>
                 <BiMessageSquareEdit></BiMessageSquareEdit>
@@ -38,9 +39,14 @@ const MainHeader = () => {
               </Link>
             </>
           )}
+          {session && (
+            <button onClick={logoutHandler} className={NAV_COMMON_STYLE}>
+              LOGOUT
+            </button>
+          )}
         </nav>
       </div>
-    </Head>
+    </>
   );
 };
 
