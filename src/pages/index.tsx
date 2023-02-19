@@ -1,7 +1,15 @@
+import Login from '@/components/Login';
+
+import FormContainer from '@/components/LoginJoinContainer';
+
 import React from 'react';
 
 const index = () => {
-  return <div className=" bg-slate-500">.</div>;
+  return (
+    <FormContainer>
+      <Login></Login>
+    </FormContainer>
+  );
 };
 
 export default index;
