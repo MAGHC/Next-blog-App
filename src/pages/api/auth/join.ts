@@ -18,10 +18,12 @@ export default async function join(req: NextApiRequest, res: NextApiResponse) {
 
     if (existEmail) {
       res.status(422).json({ message: '이미 존재하는 유저입니다.' });
+      client.close();
       return;
     }
     if (!email || !nickName || !password) {
       res.status(422).json({ message: '이메일,닉네임,패스워드를 확인해주세요' });
+      client.close();
       return;
     }
 
