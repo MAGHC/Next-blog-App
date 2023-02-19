@@ -7,7 +7,7 @@ import Layout from '@/components/Layout';
 
 export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
-    <SessionProvider>
+    <SessionProvider session={session}>
       <Layout>
         <Component {...pageProps}></Component>
       </Layout>
