@@ -1,6 +1,6 @@
 export type LoginT = {
-  id: string;
-  pw: string;
+  email: string;
+  password: string;
 };
 
 export type JoinT = {
