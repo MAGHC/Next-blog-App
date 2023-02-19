@@ -2,7 +2,11 @@ import FormContainer from '@/components/LoginJoinContainer';
 import { useEffect, useState } from 'react';
 
 import useValidation from './../../hooks/validation';
+
 import { useAuth } from '@/hooks/auth';
+
+import { getSession } from 'next-auth/react';
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 
 const Index = () => {
   const [valid, setValid] = useState(false);
@@ -69,5 +73,22 @@ const Index = () => {
     </FormContainer>
   );
 };
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getSession({ req: context.req });
+
+  if (session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
+}
 
 export default Index;
