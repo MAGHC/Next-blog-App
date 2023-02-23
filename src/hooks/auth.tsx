@@ -1,10 +1,15 @@
+import { useRouter } from 'next/router';
+
 import { useFetch } from './fetch';
+
 import { JoinT, LoginT } from '@/type/auth';
 
 import { signIn, signOut } from 'next-auth/react';
+import { AxiosError } from 'axios';
 
 export function useAuth() {
   const { postData } = useFetch();
+  const router = useRouter();
 
   const joinHandler = async (body: JoinT) => {
     const res = await postData('api/auth/join', body);
@@ -13,13 +18,17 @@ export function useAuth() {
   };
 
   const loginHandler = async (body: LoginT) => {
-    const res = await signIn('credentials', {
+    signIn('credentials', {
       redirect: false,
       email: body.email,
       password: body.password,
-    });
-
-    console.log(res);
+    })
+      .then(() => {
+        router.replace('/profile');
+      })
+      .catch((err: Error | AxiosError) => {
+        alert(err);
+      });
   };
 
   const logoutHandler = async () => {
