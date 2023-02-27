@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useFetch } from './fetch';
 
 import { JoinT, LoginT } from '@/type/auth';
+import { ChangePwT } from './../type/user';
 
 import { signIn, signOut } from 'next-auth/react';
 import { AxiosError } from 'axios';
@@ -38,9 +39,17 @@ export function useAuth() {
     return res;
   };
 
+  const changePw = async (body: ChangePwT) => {
+    postData('api/user/change-pw', body)
+      .then(console.log)
+      .catch((err: Error | AxiosError) => {
+        alert(err);
+      });
+  };
+
   const test = () => {
     console.log('dasdsadsa');
   };
 
-  return { joinHandler, loginHandler, logoutHandler, test };
+  return { joinHandler, loginHandler, logoutHandler, changePw, test };
 }
