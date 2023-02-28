@@ -17,5 +17,5 @@ module.exports = {
       kor: ['Noto Sans KR'],
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar')],
 };

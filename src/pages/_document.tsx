@@ -8,7 +8,10 @@ export default function Document() {
         <meta name="description" content="Portfolio for MAGHC" />
         <meta name="next-head-count" />
       </Head>
-      <body>
+      <body
+        className="  scrollbar-thin scrollbar-thumb-highLightSub scrollbar-track-slate-700
+      "
+      >
         <Main />
         <NextScript />
       </body>
